@@ -26,8 +26,6 @@ use App\Http\Controllers\VisitorController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/register', [AuthController::class, 'register']);
-
 Route::get('/courses', [CourseController::class, 'index']);
 
 Route::get('/questions', [QuestionController::class, 'index']);
@@ -48,6 +46,9 @@ Route::post('/messages', [MessageController::class, 'store'])
 Route::get('/visitors', [VisitorController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+
+    Route::post('/register', [AuthController::class, 'register']);
+
 
     Route::post('/logout', [AuthController::class, 'logout']);
 

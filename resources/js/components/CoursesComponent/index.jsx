@@ -12,6 +12,7 @@ function CoursesComponent() {
     const [updateCourses, setUpdateCourses] = useState();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
+        console.log(window.location.origin);
         const getCourses = async () => {
             try {
                 const response = await axios.get(`${window.location.origin}/api/courses`);

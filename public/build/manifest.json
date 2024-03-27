@@ -1,11 +1,37 @@
 {
+  "_index-!~{004}~.js": {
+    "file": "assets/index-DUEfxN0n.css",
+    "src": "_index-!~{004}~.js"
+  },
+  "_index-CYMkBo15.js": {
+    "file": "assets/index-CYMkBo15.js",
+    "name": "index",
+    "css": [
+      "assets/index-DUEfxN0n.css"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-l0sNRNKZ.js",
+    "name": "app",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CgUcmSCr.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_index-CYMkBo15.js"
+    ]
+  },
   "resources/js/app.jsx": {
-    "file": "assets/app-CFTUk6W1.js",
+    "file": "assets/app-LarpHvyO.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
-    "css": [
-      "assets/app-DUEfxN0n.css"
+    "imports": [
+      "_index-CYMkBo15.js"
     ]
   }
 }
