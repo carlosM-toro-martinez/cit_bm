@@ -41,7 +41,6 @@ function TeamComponent() {
         try {
             const token = localStorage.getItem('token');
 
-            console.log(id);
             await axios.delete(`${window.location.origin}/api/team/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

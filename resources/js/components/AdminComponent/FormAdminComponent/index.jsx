@@ -41,8 +41,6 @@ function FormComponent(props) {
     const createCourse = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        console.log(formData);
-
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(`${window.location.origin}/api/courses`, formData, {
@@ -52,7 +50,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
         } catch (error) {
             console.error('Error al crear el curso:', error);
         }
@@ -61,9 +58,9 @@ function FormComponent(props) {
     const updateCourse = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        formData.forEach((value, key) => {
-            console.log(`${key}: ${value}`);
-        });
+        // formData.forEach((value, key) => {
+        //     console.log(`${key}: ${value}`);
+        // });
         try {
             const token = localStorage.getItem('token');
 
@@ -74,7 +71,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
 
         } catch (error) {
             console.error('Error al actualizar el curso:', error);

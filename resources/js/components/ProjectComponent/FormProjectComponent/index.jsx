@@ -4,6 +4,7 @@ import FormComponentStyles from './FormComponent.styles';
 import { DropdownButton } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import axios from 'axios';
 
 function FormComponent(props) {
     const formRef = useRef(null);
@@ -38,7 +39,6 @@ function FormComponent(props) {
             try {
                 const response = await axios.get(`${window.location.origin}/api/categories`);
                 setCategories(response.data);
-                console.log(response.data);
                 setLoading(false);
             } catch (error) {
                 console.error('Error al obtener los cursos:', error);
@@ -61,7 +61,6 @@ function FormComponent(props) {
     const createProject = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        console.log(formData);
 
         try {
             const token = localStorage.getItem('token');
@@ -72,7 +71,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
         } catch (error) {
             console.error('Error al crear el curso:', error);
         }
@@ -91,7 +89,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
 
         } catch (error) {
             console.error('Error al actualizar el curso:', error);

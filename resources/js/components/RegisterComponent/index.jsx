@@ -2,6 +2,7 @@ import React from 'react';
 import NavbarComponent from '../NavbarComponent';
 import RegisterComponentStyles from './RegisterComponent.styles';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function RegisterComponent() {
     const navigate = useNavigate();
@@ -12,7 +13,6 @@ function RegisterComponent() {
             const response = await axios.post(`${window.location.origin}/api/login`, formData);
             const token = response?.data?.token;
             localStorage.setItem('token', token);
-            console.log(localStorage.getItem('token'));
             navigate('/register');
 
         } catch (error) {

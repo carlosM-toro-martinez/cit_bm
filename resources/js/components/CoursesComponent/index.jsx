@@ -12,7 +12,6 @@ function CoursesComponent() {
     const [updateCourses, setUpdateCourses] = useState();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        console.log(window.location.origin);
         const getCourses = async () => {
             try {
                 const response = await axios.get(`${window.location.origin}/api/courses`);
@@ -64,6 +63,7 @@ function CoursesComponent() {
                             <th>Title</th>
                             <th>Text</th>
                             <th>date change</th>
+                            <th>D & U</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,9 +73,11 @@ function CoursesComponent() {
                                 <td>{course.title}</td>
                                 <td>{course.text}</td>
                                 <td>{course.updated_at}</td>
-                                <td style={{ height: '100%', display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', gap: 5, marginTop: '2rem' }} >
-                                    <Button onClick={() => scrollTo(course)}> <FaPencilAlt /></Button>
-                                    <Button onClick={() => deleteCourse(course.id_courses)}><MdDeleteForever /></Button>
+                                <td>
+                                    <div style={{ height: '100%', display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', gap: 5, marginTop: '2rem' }} >
+                                        <Button onClick={() => scrollTo(course)}> <FaPencilAlt /></Button>
+                                        <Button onClick={() => deleteCourse(course.id_courses)}><MdDeleteForever /></Button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

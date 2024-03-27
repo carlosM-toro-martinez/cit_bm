@@ -28,7 +28,6 @@ function MesaggesComponent() {
         try {
             const token = localStorage.getItem('token');
 
-            console.log(id);
             await axios.delete(`${window.location.origin}/api/messages/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

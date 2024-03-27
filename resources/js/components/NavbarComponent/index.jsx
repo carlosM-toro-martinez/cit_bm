@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -19,10 +20,9 @@ function BasicExample() {
                 const response = await axios.post(`${window.location.origin}/api/logout`, null, config);
                 localStorage.removeItem('token');
                 console.log('Logout exitoso');
-                console.log(response.data);
                 navigate('/');
             } else {
-                console.log('No se encontró ningún token en el localStorage');
+                console.error('No se encontró ningún token en el localStorage');
             }
         } catch (error) {
             console.error('Error al cerrar sesión:', error);

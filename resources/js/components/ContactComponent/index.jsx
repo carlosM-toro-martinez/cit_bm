@@ -51,39 +51,39 @@ function ContactComponent() {
                             <>
                                 <tr>
                                     <th>Coordinates</th>
-                                    <td>{contact.coordinates}</td>
+                                    <td>{contact?.coordinates}</td>
                                 </tr>
                                 <tr>
                                     <th>Ubication</th>
-                                    <td>{contact.ubication}</td>
+                                    <td>{contact?.ubication}</td>
                                 </tr>
                                 <tr>
                                     <th>Mail</th>
-                                    <td>{contact.mail}</td>
+                                    <td>{contact?.mail}</td>
                                 </tr>
                                 <tr>
                                     <th>Phone Number</th>
-                                    <td>{contact.phone_number}</td>
+                                    <td>{contact?.phone_number}</td>
                                 </tr>
                                 <tr>
                                     <th>Facebook</th>
-                                    <td>{contact.facebook}</td>
+                                    <td>{contact?.facebook}</td>
                                 </tr>
                                 <tr>
                                     <th>Instagram</th>
-                                    <td>{contact.instagram}</td>
+                                    <td>{contact?.instagram}</td>
                                 </tr>
                                 <tr>
                                     <th>Tiktok</th>
-                                    <td>{contact.tiktok}</td>
+                                    <td>{contact?.tiktok}</td>
                                 </tr>
                                 <tr>
                                     <th>X</th>
-                                    <td>{contact.x}</td>
+                                    <td>{contact?.x}</td>
                                 </tr>
                                 <tr>
                                     <th>date change</th>
-                                    <td>{contact.updated_at}</td>
+                                    <td>{contact?.updated_at}</td>
                                 </tr>
                                 <tr>
                                     <th>Update & Delete</th>

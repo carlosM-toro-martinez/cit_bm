@@ -38,8 +38,6 @@ function AdminComponent() {
     const deleteCourse = async (id) => {
         try {
             const token = localStorage.getItem('token');
-
-            console.log(id);
             await axios.delete(`${window.location.origin}/api/courses/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

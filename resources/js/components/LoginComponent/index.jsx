@@ -12,7 +12,7 @@ function LoginComponent() {
             const response = await axios.post(`${window.location.origin}/api/login`, formData);
             const token = response?.data?.token;
             localStorage.setItem('token', token);
-            console.log(localStorage.getItem('token'));
+            (localStorage.getItem('token'));
             navigate('/register');
 
         } catch (error) {

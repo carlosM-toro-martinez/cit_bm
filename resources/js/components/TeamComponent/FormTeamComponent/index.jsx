@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormComponentStyles from './FormComponent.styles';
+import axios from 'axios';
 
 function FormComponent(props) {
     const formRef = useRef(null);
@@ -54,7 +55,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
         } catch (error) {
             console.error('Error al crear el miembro del equipo:', error);
         }
@@ -72,7 +72,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
         } catch (error) {
             console.error('Error al actualizar el miembro del equipo:', error);
         }

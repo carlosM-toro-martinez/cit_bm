@@ -38,8 +38,6 @@ function CategoriesComponent() {
     const deleteCourse = async (id) => {
         try {
             const token = localStorage.getItem('token');
-
-            console.log(id);
             await axios.delete(`${window.location.origin}/api/categories/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -4,7 +4,6 @@ import NavbarComponent from '../NavbarComponent';
 
 function ProtectedRoutes() {
     const isLoggedIn = localStorage.getItem('token');
-    console.log(isLoggedIn);
     if (!isLoggedIn) {
         return <Navigate to="/" />;
     }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormComponentStyles from './FormComponent.styles';
+import axios from 'axios';
 
 function FormComponent(props) {
     const formRef = useRef(null);
@@ -17,9 +18,9 @@ function FormComponent(props) {
     const [idContact, setIdContact] = useState();
 
     useEffect(() => {
-        if (!loading) {
-            setLat(JSON.parse(contact[0].coordinates).lat);
-            setLong(JSON.parse(contact[0].coordinates).long);
+        if (!loading && contact.length > 0) {
+            setLat(JSON.parse(contact[0]?.coordinates)?.lat);
+            setLong(JSON.parse(contact[0]?.coordinates)?.long);
             setUbication(contact[0].ubication);
             setMail(contact[0].mail);
             setPhoneNumber(contact[0].phone_number);
@@ -57,7 +58,6 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
-            console.log(response);
 
         } catch (error) {
             console.error('Error al actualizar el curso:', error);

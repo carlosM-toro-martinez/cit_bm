@@ -39,7 +39,6 @@ function ProjectComponent() {
         try {
             const token = localStorage.getItem('token');
 
-            console.log(id);
             await axios.delete(`${window.location.origin}/api/projects/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
