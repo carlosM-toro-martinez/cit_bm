@@ -26,6 +26,8 @@ use App\Http\Controllers\VisitorController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('/register', [AuthController::class, 'register']);
+
 Route::get('/courses', [CourseController::class, 'index']);
 
 Route::get('/questions', [QuestionController::class, 'index']);
@@ -48,8 +50,6 @@ Route::get('/visitors', [VisitorController::class, 'index']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
-
-    Route::post('/register', [AuthController::class, 'register']);
 
     Route::post('/courses', [CourseController::class, 'store'])
         ->middleware(\App\Http\Middleware\ImageUploadMiddleware::class);
