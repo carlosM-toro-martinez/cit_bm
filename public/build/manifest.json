@@ -3,11 +3,14 @@
     "file": "assets/index-DUEfxN0n.css",
     "src": "_index-!~{004}~.js"
   },
-  "_index-A8rjnw6L.js": {
-    "file": "assets/index-A8rjnw6L.js",
+  "_index-DCj1sWaR.js": {
+    "file": "assets/index-DCj1sWaR.js",
     "name": "index",
     "css": [
       "assets/index-DUEfxN0n.css"
+    ],
+    "assets": [
+      "assets/logo-cit-DDH7OsWF.png"
     ]
   },
   "resources/css/app.css": {
@@ -17,21 +20,25 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-Do-FLNo8.js",
+    "file": "assets/app-D9M23KOg.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_index-A8rjnw6L.js"
+      "_index-DCj1sWaR.js"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BS_8ioyx.js",
+    "file": "assets/app-I7QZ5_e9.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
-      "_index-A8rjnw6L.js"
+      "_index-DCj1sWaR.js"
     ]
+  },
+  "resources/js/assets/logo-cit.png": {
+    "file": "assets/logo-cit-DDH7OsWF.png",
+    "src": "resources/js/assets/logo-cit.png"
   }
 }

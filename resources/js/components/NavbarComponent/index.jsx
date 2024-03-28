@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo-cit.png';
 
 function BasicExample() {
     const navigate = useNavigate();
@@ -37,7 +38,8 @@ function BasicExample() {
         <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark" style={{ backgroundColor: '#eb5d1e' }}>
             <Container className="justify-content-between"
                 style={{ display: 'flex', justifyContent: 'space-between' }} >
-                <Navbar.Brand href="#home" style={{ marginRight: '14rem' }}>"Brilliant Minds"</Navbar.Brand>
+                <img src={logo} width={'40rem'} alt="" sizes="" srcset="" />
+                <Navbar.Brand href="/" style={{ marginRight: '10rem' }}>Brilliant Minds</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
