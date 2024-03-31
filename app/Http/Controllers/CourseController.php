@@ -18,7 +18,6 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        Log::debug($request);
         $request->validate([
             'title' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -42,13 +41,10 @@ class CourseController extends Controller
             'text' => 'required|string',
         ]);
 
-        Log::debug('aqui 2');
-
         $course = Course::findOrFail($id);
-        Log::debug($course);
 
         $course->title = $request->title;
-        $course->image = $request->image;
+        $course->image = $request->image_name;
         $course->text = $request->text;
         $course->save();
 
