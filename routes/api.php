@@ -11,6 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProyectController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitorController;
 
 /*
@@ -37,6 +38,7 @@ Route::get('/contacts', [ContactController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
 
 Route::get('/allprojects', [ProyectController::class, 'index']);
+Route::get('/projects/{id_category}', [ProyectController::class, 'indexByCategory']);
 
 Route::get('/messages', [MessageController::class, 'index']);
 Route::post('/messages', [MessageController::class, 'store'])
@@ -48,6 +50,8 @@ Route::get('/visitors', [VisitorController::class, 'index']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/users', [UserController::class, 'index']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -81,7 +85,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/projects/{id}', [ProyectController::class, 'update'])
         ->middleware(\App\Http\Middleware\ImageUploadMiddleware::class);
     Route::delete('/projects/{id}', [ProyectController::class, 'destroy']);
-    Route::get('/projects/{id_category}', [ProyectController::class, 'indexByCategory']);
 
     Route::post('/messages/{id}', [MessageController::class, 'update']);
     Route::delete('/messages/{id}', [MessageController::class, 'destroy']);

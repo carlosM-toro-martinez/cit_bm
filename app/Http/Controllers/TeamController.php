@@ -46,7 +46,9 @@ class TeamController extends Controller
         ]);
 
         $team = Team::findOrFail($id);
-        $team->image = $request->image_name;
+        if ($request->image_name) {
+            $team->image = $request->image_name;
+        }
         $team->name = $request->name;
         $team->last_name = $request->last_name;
         $team->mail = $request->mail;

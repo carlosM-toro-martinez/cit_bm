@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormComponentStyles from './FormComponent.styles';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
 
 function FormComponent(props) {
     const formRef = useRef(null);
-    const { team, setLoading } = props;
+    const { team, setLoading, change } = props;
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [mail, setMail] = useState('');
@@ -32,6 +33,17 @@ function FormComponent(props) {
         }
     }, [team]);
 
+    const scrollTo = async () => {
+        setName('');
+        setLastName('');
+        setMail('');
+        setPosition('');
+        setImage(null);
+        setImagePreview(null);
+        const formComponent = document.getElementById('buttonAdd');
+        formComponent.scrollIntoView({ behavior: 'smooth' });
+    };
+
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -45,16 +57,16 @@ function FormComponent(props) {
     const createTeamMember = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-
         try {
             const token = localStorage.getItem('token');
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/team`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setLoading(true);
+            scrollTo();
         } catch (error) {
             console.error('Error al crear el miembro del equipo:', error);
         }
@@ -65,13 +77,14 @@ function FormComponent(props) {
         const formData = new FormData(event.target);
         try {
             const token = localStorage.getItem('token');
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/team/${team.id_team}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setLoading(true);
+            scrollTo();
         } catch (error) {
             console.error('Error al actualizar el miembro del equipo:', error);
         }
@@ -138,7 +151,19 @@ function FormComponent(props) {
                                     <div className="error-message"></div>
                                     <div className="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
                                 </div>
-                                <div className="text-center"><button type="submit">{team ? 'Actualizar Miembro del Equipo' : 'Crear Miembro del Equipo'}</button></div>
+                                <div className="text-center">
+                                    {!change ? <button type="submit">{team ? 'Actualizar Miembro del Equipo' : 'Crear Miembro del Equipo'}</button> :
+                                        <button type="submit" disabled>
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            <span className="visually-hidden">Loading...</span>
+                                        </button>}
+                                </div>
                             </form>
                         </div>
                     </div>

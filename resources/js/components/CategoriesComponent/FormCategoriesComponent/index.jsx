@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormComponentStyles from './FormComponent.styles';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
 
 function FormComponent(props) {
     const formRef = useRef(null);
-    const { categorie, setLoading } = props;
+    const { categorie, setLoading, change } = props;
     const [name, setName] = useState('');
     const [idCategorie, setIdCategorie] = useState();
 
@@ -20,19 +21,27 @@ function FormComponent(props) {
         }
     }, [categorie])
 
+    const scrollTo = async () => {
+        setIdCategorie('');
+        setName('');
+        const formComponent = document.getElementById('buttonAdd');
+        formComponent.scrollIntoView({ behavior: 'smooth' });
+    };
+
     const createCategorie = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
 
         try {
             const token = localStorage.getItem('token');
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/categories`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setLoading(true);
+            scrollTo();
         } catch (error) {
             console.error('Error al crear el curso:', error);
         }
@@ -43,15 +52,14 @@ function FormComponent(props) {
         const formData = new FormData(event.target);
         try {
             const token = localStorage.getItem('token');
-
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/categories/${idCategorie}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setLoading(true);
-
+            scrollTo();
         } catch (error) {
             console.error('Error al actualizar el curso:', error);
         }
@@ -80,7 +88,19 @@ function FormComponent(props) {
                                     <div className="error-message"></div>
                                     <div className="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
                                 </div>
-                                <div className="text-center"><button type="submit">{categorie ? 'Actualizar Categoria' : 'Crear Categoria'}</button></div>
+                                <div className="text-center">
+                                    {!change ? <button type="submit">{categorie ? 'Actualizar Categoria' : 'Crear Categoria'}</button> :
+                                        <button type="submit" disabled>
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            <span className="visually-hidden">Loading...</span>
+                                        </button>}
+                                </div>
                             </form>
                         </div>
                     </div>

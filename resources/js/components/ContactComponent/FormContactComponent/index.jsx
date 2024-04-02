@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormComponentStyles from './FormComponent.styles';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
 
 function FormComponent(props) {
     const formRef = useRef(null);
     const { contact, setLoading, loading } = props;
     const [lat, setLat] = useState('');
+    const [change, setChange] = useState('');
     const [long, setLong] = useState('');
     const [ubication, setUbication] = useState('');
     const [mail, setMail] = useState('');
@@ -50,7 +52,7 @@ function FormComponent(props) {
         }
         try {
             const token = localStorage.getItem('token');
-
+            setChange(true);
             const response = await axios.post(`${window.location.origin}/api/contacts/${idContact}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -58,6 +60,7 @@ function FormComponent(props) {
                 }
             });
             setLoading(true);
+            setChange(false);
 
         } catch (error) {
             console.error('Error al actualizar el curso:', error);
@@ -140,7 +143,20 @@ function FormComponent(props) {
                                     <div className="error-message"></div>
                                     <div className="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
                                 </div>
-                                <div className="text-center"><button type="submit">Actualizar Contactos</button></div>
+                                <div className="text-center">
+                                    {!change ? <button type="submit">Actualizar Contactos</button> :
+                                        <button type="submit" disabled>
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            <span className="visually-hidden">Loading...</span>
+                                        </button>}
+
+                                </div>
                             </form>
                         </div>
                     </div>

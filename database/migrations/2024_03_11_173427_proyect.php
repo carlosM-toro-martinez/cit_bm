@@ -15,10 +15,11 @@ return new class extends Migration
             $table->increments('id_proyect');
             $table->string('image');
             $table->string('title');
+            $table->text('description')->nullable();
             $table->unsignedInteger('id_category');
 
             $table->foreign('id_category')->references('id_category')->on('categories');
-            
+
             $table->timestamps();
         });
     }
@@ -31,4 +32,3 @@ return new class extends Migration
         Schema::dropIfExists('projects');
     }
 };
-

@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormComponentStyles from './FormComponent.styles';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
 
 function FormComponent(props) {
     const formRef = useRef(null);
-    const { course, setLoading } = props;
+    const { course, setLoading, change } = props;
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [idCourse, setIdCourse] = useState();
@@ -29,6 +30,16 @@ function FormComponent(props) {
         }
     }, [course])
 
+    const scrollTo = async () => {
+        setIdCourse('');
+        setTitle('');
+        setText('');
+        setImage(null);
+        setImagePreview(null);
+        const formComponent = document.getElementById('buttonAdd');
+        formComponent.scrollIntoView({ behavior: 'smooth' });
+    };
+
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -45,13 +56,14 @@ function FormComponent(props) {
 
         try {
             const token = localStorage.getItem('token');
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/courses`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setLoading(true);
+            scrollTo();
         } catch (error) {
             console.error('Error al crear el curso:', error);
         }
@@ -65,14 +77,14 @@ function FormComponent(props) {
         // });
         try {
             const token = localStorage.getItem('token');
-
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/courses/${idCourse}`, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setLoading(true);
+            scrollTo();
 
         } catch (error) {
             console.error('Error al actualizar el curso:', error);
@@ -125,7 +137,19 @@ function FormComponent(props) {
                                     <div className="error-message"></div>
                                     <div className="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
                                 </div>
-                                <div className="text-center"><button type="submit">{course ? 'Actualizar Curso' : 'Crear Curso'}</button></div>
+                                <div className="text-center">
+                                    {!change ? <button type="submit">{course ? 'Actualizar Curso' : 'Crear Curso'}</button> :
+                                        <button type="submit" disabled>
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            <span className="visually-hidden">Loading...</span>
+                                        </button>}
+                                </div>
                             </form>
                         </div>
                     </div>

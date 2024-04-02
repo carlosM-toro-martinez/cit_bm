@@ -44,7 +44,9 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         $course->title = $request->title;
-        $course->image = $request->image_name;
+        if ($request->image_name) {
+            $course->image = $request->image_name;
+        }
         $course->text = $request->text;
         $course->save();
 

@@ -3,6 +3,7 @@
 /public/hot
 /storage/*.key
 /vendor
+/public/storage
 .env
 .env.backup
 .env.example

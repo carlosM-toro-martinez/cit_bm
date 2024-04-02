@@ -36,6 +36,7 @@ class ProyectController extends Controller
         $proyect = new Project();
         $proyect->image = $request->image_name;
         $proyect->title = $request->title;
+        $proyect->description = $request->description;
         $proyect->id_category = $request->id_category;
         $proyect->save();
 
@@ -51,8 +52,11 @@ class ProyectController extends Controller
         ]);
 
         $proyect = Project::findOrFail($id);
-        $proyect->image = $request->image_name;
+        if ($request->image_name) {
+            $proyect->image = $request->image_name;
+        }
         $proyect->title = $request->title;
+        $proyect->description = $request->description;
         $proyect->id_category = $request->id_category;
         $proyect->save();
 

@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import LoginComponentStyles from './LoginComponent.styles';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 function LoginComponent() {
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         try {
+            setLoading(true);
             const response = await axios.post(`${window.location.origin}/api/login`, formData);
             const token = response?.data?.token;
+            const user = response?.data?.user;
             localStorage.setItem('token', token);
+            localStorage.setItem('userName', user?.name);
+            localStorage.setItem('userEmail', user?.email);
+            setLoading(false);
             (localStorage.getItem('token'));
             navigate('/register');
+
 
         } catch (error) {
             console.error('Error al iniciar sesion:', error);
@@ -49,7 +57,20 @@ function LoginComponent() {
                                     <div className="error-message"></div>
                                     <div className="sent-message">Tu mensaje ha sido enviado. ¡Gracias!</div>
                                 </div>
-                                <div className="text-center"><button type="submit">Iniciar Sesion</button></div>
+                                <div className="text-center">
+                                    {!loading ? <button type="submit">Iniciar Sesion</button> :
+                                        <button type="submit" disabled>
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            <span className="visually-hidden">Loading...</span>
+                                        </button>}
+
+                                </div>
                             </form>
                         </div>
                     </div>
