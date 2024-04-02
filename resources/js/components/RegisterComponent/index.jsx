@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavbarComponent from '../NavbarComponent';
 import RegisterComponentStyles from './RegisterComponent.styles';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import { Button, Spinner, Table } from 'react-bootstrap';
@@ -29,7 +28,7 @@ function RegisterComponent() {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-                setUsers(response.data);
+                setUsers(response?.data);
                 setLoading(false);
                 setChange(false);
                 setName('');
@@ -58,8 +57,6 @@ function RegisterComponent() {
             </Alert>
         );
     };
-
-    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -74,7 +71,6 @@ function RegisterComponent() {
             const response = await axios.post(`${window.location.origin}/api/register`, formData, config);
             onSaveUser();
             setLoading(false);
-            navigate('/register');
 
         } catch (error) {
             console.error('Error al registrar usuario:', error);
