@@ -22,12 +22,16 @@ function RegisterComponent() {
             try {
                 setLoading(true);
                 const token = localStorage.getItem('token');
+                console.log(localStorage);
+
                 const response = await axios.get(`${window.location.origin}/api/users`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data'
                     }
                 });
+                console.log(token);
+                console.log(response);
                 setUsers(response?.data);
                 setLoading(false);
                 setChange(false);
@@ -111,7 +115,7 @@ function RegisterComponent() {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((user, index) => (
+                            {users ? users.map((user, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{user.name}</td>
@@ -123,7 +127,7 @@ function RegisterComponent() {
                                         </div>
                                     </td>
                                 </tr>
-                            ))}
+                            )) : null}
                         </tbody>
                     </Table>
                     {change ?

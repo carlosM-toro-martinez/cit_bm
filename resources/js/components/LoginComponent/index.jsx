@@ -15,12 +15,19 @@ function LoginComponent() {
             const response = await axios.post(`${window.location.origin}/api/login`, formData);
             const token = response?.data?.token;
             const user = response?.data?.user;
-            localStorage.setItem('token', token);
-            localStorage.setItem('userName', user?.name);
-            localStorage.setItem('userEmail', user?.email);
-            setLoading(false);
-            (localStorage.getItem('token'));
-            navigate('/register');
+            console.log(user);
+            console.log(token);
+            console.log(response);
+            if (token) {
+                localStorage.setItem('token', token);
+                localStorage.setItem('userName', user?.name);
+                localStorage.setItem('userEmail', user?.email);
+                setLoading(false);
+                navigate('/register');
+            } else {
+                alert("Invalid username or password");
+                setLoading(false);
+            }
 
 
         } catch (error) {
