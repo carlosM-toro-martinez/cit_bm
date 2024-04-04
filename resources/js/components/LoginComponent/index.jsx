@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import LoginComponentStyles from './LoginComponent.styles';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 
 function LoginComponent() {
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('token');
+        if (isLoggedIn) {
+            navigate('/register');
+        }
+    }, []);
+
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -15,9 +23,6 @@ function LoginComponent() {
             const response = await axios.post(`${window.location.origin}/api/login`, formData);
             const token = response?.data?.token;
             const user = response?.data?.user;
-            console.log(user);
-            console.log(token);
-            console.log(response);
             if (token) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('userName', user?.name);
